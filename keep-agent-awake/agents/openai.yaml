@@ -1,0 +1,4 @@
+interface:
+  display_name: "Keep Agent Awake"
+  short_description: "Task-scoped keep-awake for macOS, Windows, and Linux"
+  default_prompt: "Use $keep-agent-awake to prevent idle sleep on this host during the task, then release and verify the owned sleep inhibitor before finishing."
