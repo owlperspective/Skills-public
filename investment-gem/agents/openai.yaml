@@ -1,0 +1,4 @@
+interface:
+  display_name: "Investment Gem"
+  short_description: "Evidence-based stock and business research"
+  default_prompt: "Use $investment-gem to research this company using available filings and market data, explaining business quality, valuation, risks, and evidence gaps."
