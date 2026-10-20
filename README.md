@@ -14,16 +14,49 @@ The skill uses public filings, company investor materials, and available market 
 
 It requires Python 3.9 or newer, with no pip packages. The display can sleep by default; keeping it awake is optional on macOS and Windows. The helper supports timeouts and cancellation and changes no persistent power settings. It cannot extend AI usage limits or keep a client laptop awake from a remote executor. See the skill for commands, platform limits, and cleanup.
 
-## Use it
+## Installation
 
-Copy a complete skill folder into your assistant's supported skills location, or use a symlink where supported. Each skill starts at `SKILL.md`; `agents/openai.yaml` supplies optional display metadata for compatible assistants. Preserve any scripts or other resources in the folder. For conversation-only use, Investment Gem's `SKILL.md` is self-contained. Keep Agent Awake needs its helper on the computer where it will run. Check the host's current documentation for installation and invocation details.
+Clone once, or use your existing clone:
 
-Example requests:
+```sh
+git clone https://github.com/owlperspective/Skills-public.git "$HOME/Projects/Skills-public"
+```
 
-- "Use Investment Gem to research this company using its latest filings. Explain the business, cash generation, dilution, valuation, and main risks."
-- "Use Investment Gem to compare these two stocks. Match the reporting periods and explain which metrics are actually comparable."
-- "Use Investment Gem for a semiconductor sector deep dive. Explain the candidate universe, screen for cycle resilience, and investigate up to three finalists."
-- "Use Investment Gem to review this uploaded annual report. Identify what can be established from the document and what still needs current evidence."
-- "Use Keep Agent Awake during this long local task, allow the display to sleep, and release the request when finished."
+Install both complete skill folders in your agent's user-level skills directory:
+
+| Agent | Skills directory | Invoke in agent chat |
+|---|---|---|
+| [Codex CLI / IDE](https://learn.chatgpt.com/docs/build-skills) | `~/.agents/skills/` | `$investment-gem` or `$keep-agent-awake` |
+| [Claude Code](https://code.claude.com/docs/en/skills) | `~/.claude/skills/` | `/investment-gem` or `/keep-agent-awake` |
+| [Cursor](https://cursor.com/docs/skills) | `~/.cursor/skills/` | Type `/` and select either skill. |
+
+On macOS/Linux, use symlinks for Codex or Claude Code to keep one maintained copy. Set the paths for your clone and agent; existing destinations, including broken links, are left untouched.
+
+```sh
+skills_repo="$HOME/Projects/Skills-public"
+skills_dir="$HOME/.agents/skills" # Claude Code: "$HOME/.claude/skills"
+mkdir -p "$skills_dir"
+for skill in investment-gem keep-agent-awake; do
+  skill_target="$skills_dir/$skill"
+  if [ ! -f "$skills_repo/$skill/SKILL.md" ]; then
+    printf 'Missing source: %s\n' "$skills_repo/$skill"
+  elif [ -e "$skill_target" ] || [ -L "$skill_target" ]; then
+    printf 'Keeping existing: %s\n' "$skill_target"
+  else
+    ln -s "$skills_repo/$skill" "$skill_target"
+  fi
+done
+```
+
+On Windows, copy both complete folders into the listed directory under your user profile. Open a new agent session if the skills do not appear. Keep the clone in place when using symlinks; source updates also update the linked installation.
+
+## Usage
+
+Add the appropriate invocation from the table to your request, for example:
+
+- **Investment Gem:** "Research Microsoft using current filings and quotes. Explain business quality, cash generation, valuation, and risks."
+- **Keep Agent Awake:** "Keep this computer awake during the task, allow the display to sleep, and release the request when finished."
+
+For other agents, follow their skills documentation or ask them to read the chosen `SKILL.md`. Investment Gem can also be attached directly to a conversation. Keep Agent Awake requires its Python helper and local command execution on the computer to protect; attaching its instructions alone does not prevent sleep.
 
 Investment Gem contains no personal portfolio or watchlist data, private service endpoints, database-saving workflow, custom DCF rules, or FMP integration. Research is returned in the conversation unless another output is requested.
