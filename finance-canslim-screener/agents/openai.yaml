@@ -1,0 +1,4 @@
+interface:
+  display_name: "Finance CANSLIM Screener"
+  short_description: "Find and rank growth stocks with a CANSLIM-style screen."
+  default_prompt: "Use $finance-canslim-screener to screen for CANSLIM-style stock candidates using current data, optional Finviz-style filters, available market data, market context, chart setup, institutional sponsorship, and O'Neil execution rules."

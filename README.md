@@ -8,6 +8,12 @@ Public AI skills for practical research and learning.
 
 The skill uses public filings, company investor materials, and available market data. It requires no particular paid data provider, API key, database, or companion skill. Current research needs browsing or another reliable source of current documents and prices. Without those tools, it can analyze documents you supply and identify the limits of the evidence.
 
+## Finance CANSLIM Screener
+
+[Finance CANSLIM Screener](finance-canslim-screener/SKILL.md) supports growth-stock discovery, ticker audits, watchlist ranking, and reviews of bases, breakouts, sponsorship, and market direction. Its custom research scorecard separates unavailable evidence from weak results.
+
+Use available current filings and market data. No paid provider, API key, account, or companion skill is required. The optional Finviz URL helper needs Python 3.10 or newer and no pip packages. It prints starting-screen URLs and does not retrieve results or place trades. Install the complete folder to include its framework and helper.
+
 ## Keep Agent Awake
 
 [Keep Agent Awake](keep-agent-awake/SKILL.md) prevents idle sleep during an active local task and releases its owned request when work finishes. The helper supports macOS through caffeinate, native Windows through its execution-state API, and Linux through systemd-inhibit with an accessible systemd-logind service.
@@ -22,13 +28,13 @@ Clone once, or use your existing clone:
 git clone https://github.com/owlperspective/Skills-public.git "$HOME/Projects/Skills-public"
 ```
 
-Install both complete skill folders in your agent's user-level skills directory:
+Install the complete skill folders you want in your agent's user-level skills directory:
 
 | Agent | Skills directory | Invoke in agent chat |
 |---|---|---|
-| [Codex CLI / IDE](https://learn.chatgpt.com/docs/build-skills) | `~/.agents/skills/` | `$investment-gem` or `$keep-agent-awake` |
-| [Claude Code](https://code.claude.com/docs/en/skills) | `~/.claude/skills/` | `/investment-gem` or `/keep-agent-awake` |
-| [Cursor](https://cursor.com/docs/skills) | `~/.cursor/skills/` | Type `/` and select either skill. |
+| [Codex CLI / IDE](https://learn.chatgpt.com/docs/build-skills) | `~/.agents/skills/` | `$investment-gem`, `$finance-canslim-screener`, or `$keep-agent-awake` |
+| [Claude Code](https://code.claude.com/docs/en/skills) | `~/.claude/skills/` | `/investment-gem`, `/finance-canslim-screener`, or `/keep-agent-awake` |
+| [Cursor](https://cursor.com/docs/skills) | `~/.cursor/skills/` | Type `/` and select a skill. |
 
 On macOS/Linux, use symlinks for Codex or Claude Code to keep one maintained copy. Set the paths for your clone and agent; existing destinations, including broken links, are left untouched.
 
@@ -36,7 +42,7 @@ On macOS/Linux, use symlinks for Codex or Claude Code to keep one maintained cop
 skills_repo="$HOME/Projects/Skills-public"
 skills_dir="$HOME/.agents/skills" # Claude Code: "$HOME/.claude/skills"
 mkdir -p "$skills_dir"
-for skill in investment-gem keep-agent-awake; do
+for skill in investment-gem finance-canslim-screener keep-agent-awake; do
   skill_target="$skills_dir/$skill"
   if [ ! -f "$skills_repo/$skill/SKILL.md" ]; then
     printf 'Missing source: %s\n' "$skills_repo/$skill"
@@ -48,15 +54,16 @@ for skill in investment-gem keep-agent-awake; do
 done
 ```
 
-On Windows, copy both complete folders into the listed directory under your user profile. Open a new agent session if the skills do not appear. Keep the clone in place when using symlinks; source updates also update the linked installation.
+On Windows, copy the chosen complete folders into the listed directory under your user profile. Open a new agent session if the skills do not appear. Keep the clone in place when using symlinks; source updates also update the linked installation.
 
 ## Usage
 
 Add the appropriate invocation from the table to your request, for example:
 
 - **Investment Gem:** "Research Microsoft using current filings and quotes. Explain business quality, cash generation, valuation, and risks."
+- **Finance CANSLIM Screener:** "Screen US growth stocks using current evidence. Explain CANSLIM fit, market context, setup quality, and data gaps."
 - **Keep Agent Awake:** "Keep this computer awake during the task, allow the display to sleep, and release the request when finished."
 
-For other agents, follow their skills documentation or ask them to read the chosen `SKILL.md`. Investment Gem can also be attached directly to a conversation. Keep Agent Awake requires its Python helper and local command execution on the computer to protect; attaching its instructions alone does not prevent sleep.
+For other agents, follow their skills documentation or ask them to read the chosen `SKILL.md`. Investment Gem can also be attached directly to a conversation. For CANSLIM screening, include the referenced framework as well; the Python helper is optional. Keep Agent Awake requires its Python helper and local command execution on the computer to protect; attaching its instructions alone does not prevent sleep.
 
 Investment Gem contains no personal portfolio or watchlist data, private service endpoints, database-saving workflow, custom DCF rules, or FMP integration. Research is returned in the conversation unless another output is requested.
