@@ -2,6 +2,22 @@
 
 Public AI skills for practical research and learning.
 
+## Quick start from the ZIP
+
+1. [Download the ZIP](https://github.com/owlperspective/Skills-public/archive/refs/heads/main.zip) and extract it. Open the extracted `Skills-public-main` folder as a local workspace in Codex or Claude Code. In a terminal, start the agent from that folder.
+2. Paste the prompt below into the agent chat. If the app or operating system asks for permission, allow the agent to read the extracted folder and write to the skill installation folder listed below. You can also copy the skill folders yourself using the table under [Installation](#installation).
+3. Start a new local agent session if the skill does not appear, then invoke it by name using the table below.
+
+```text
+Read README.md in this workspace. Ask which skills I want, then help me
+install them for this app. Copy each complete skill folder, including
+SKILL.md, references and scripts, into the personal skills directory for
+Codex (~/.agents/skills/) or Claude Code (~/.claude/skills/).
+Keep any existing installation. If folder access is blocked, tell me
+which folder needs permission or where to copy the folder myself.
+Check that each copied folder contains SKILL.md and tell me how to invoke it.
+```
+
 ## Investment Gem
 
 [Investment Gem](investment-gem/SKILL.md) guides an AI assistant through company research, stock comparisons, and sector deep dives. It covers business economics, financial statements, earnings quality, valuation, and risks, with optional price-action context.
@@ -22,13 +38,13 @@ It requires Python 3.9 or newer, with no pip packages. The display can sleep by 
 
 ## Installation
 
-Clone once, or use your existing clone:
+Use the extracted ZIP or your existing clone. To clone the repository:
 
 ```sh
 git clone https://github.com/owlperspective/Skills-public.git "$HOME/Projects/Skills-public"
 ```
 
-Install the complete skill folders you want in your agent's user-level skills directory:
+Copy the complete skill folders you want into your agent's personal skills directory. For example, Investment Gem should end up at `~/.agents/skills/investment-gem/SKILL.md` in Codex or `~/.claude/skills/investment-gem/SKILL.md` in Claude Code.
 
 | Agent | Skills directory | Invoke in agent chat |
 |---|---|---|
